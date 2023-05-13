@@ -1,0 +1,675 @@
+Sub reset() 'subroutine to reset the sheets
+
+    Sheets(2).Activate
+
+    Clear 'call subroutine
+
+   
+
+    Sheets(3).Activate
+
+    Clear 'call subroutine
+
+   
+
+    Sheets(4).Activate
+
+    Clear 'call subroutine
+
+   
+
+    Sheets(2).Range("A1").Value = "DAN "
+
+    Sheets(2).Range("B1").Value = "DYN"
+
+    Sheets(2).Range("C1").Value = "Sentence"
+
+   
+
+    Sheets(2).Select 'next sheet
+
+    Cells.Select 'format columns
+
+    toblack 'change all columns to black
+
+   
+
+    
+
+    Sheets(3).Range("A1").Value = "DAN"
+
+    Sheets(3).Range("B1").Value = "DYN"
+
+   
+
+    Sheets(3).Select 'next sheet
+
+    Cells.Select 'format columns
+
+    toblack 'change all columns to black
+
+   
+
+    
+
+    Sheets(4).Range("A1").Value = "DAN"
+
+    Sheets(4).Range("B1").Value = "DYN"
+
+   
+
+    Sheets(4).Select 'next sheet
+
+    Cells.Select 'format columns
+
+    toblack 'change all columns to black
+
+   
+
+    
+
+End Sub
+
+ 
+
+Sub Clear() 'subroutine used in reset subroutine
+
+   
+
+    Cells.ClearContents 'clear the contents of the sheet
+
+    Cells.Select
+
+    With Selection.Interior 'make sure cells are not highlighted
+
+        .Pattern = xlNone
+
+        .TintAndShade = 0
+
+        .PatternTintAndShade = 0
+
+    End With
+
+ 
+
+ 
+
+End Sub
+
+ 
+
+Sub toblack() 'subroutine used in reset subroutine and matching2 subroutine
+
+Columns("A:B").Select
+
+    With Selection.Font
+
+        .ColorIndex = xlAutomatic
+
+        .TintAndShade = 0
+
+    End With
+
+End Sub
+
+ 
+
+'////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+ 
+
+Sub matching() 'subroutine to compare "daily T requests" and "worksheets"
+
+   
+
+    'convert one set of columns to text and the other set to numbers to compare them as the same type
+
+    toText
+
+   
+
+    'find all values that match up and highlight them
+
+    finding
+
+ 
+
+End Sub
+
+ 
+
+Sub toText() 'subroutine used in matching subroutine
+
+   
+
+    Sheets(2).Select 'next sheet
+
+    Cells.Select 'format columns
+
+    formatting2 ' format all column width
+
+   
+
+    Columns("A:A").Select
+
+    formattingNum 'calling subroutine
+
+    turnblack 'change colour of text to balck
+
+   
+
+    Columns("B:B").Select
+
+    formatting1 'calling subroutine
+
+    turnblack 'change colour of text to balck
+
+   
+
+    Columns("C:C").Select
+
+    formatting1 'calling subroutine
+
+   
+
+    Rows("1:1").Select
+
+    Selection.Font.Bold = True
+
+   
+
+    
+
+    
+
+    Sheets(3).Select 'next sheet
+
+    Cells.Select 'format columns
+
+    formatting2 ' format all column width
+
+   
+
+    Columns("A:A").Select
+
+    formattingNum 'calling subroutine
+
+    turnblack 'change colour of text to balck
+
+   
+
+    Columns("B:B").Select
+
+    formatting1 'calling subroutine
+
+    turnblack 'change colour of text to balck
+
+   
+
+    Rows("1:1").Select
+
+    Selection.Font.Bold = True
+
+   
+
+    
+
+    
+
+    Sheets(4).Select 'next sheet
+
+    Cells.Select 'format columns
+
+    formatting2 ' format all column width
+
+   
+
+    Columns("A:A").Select
+
+    'change text to number format
+
+    Selection.TextToColumns Destination:=Range("A1"), DataType:=xlDelimited, _
+    TextQualifier:=xlDoubleQuote, ConsecutiveDelimiter:=False, Tab:=True, _
+    Semicolon:=False, Comma:=False, Space:=False, Other:=False, FieldInfo _
+    :=Array(1, 1), TrailingMinusNumbers:=True
+
+   
+
+    formattingNum 'calling subroutine to ensure that text has been converted to number format
+
+    turnblack 'change colour of text to balck
+
+   
+
+    Columns("B:B").Select
+
+    formatting1 'calling subroutine
+
+    turnblack 'change colour of text to balck
+
+   
+
+    Rows("1:1").Select
+
+    Selection.Font.Bold = True
+
+   
+
+    
+
+End Sub
+
+ 
+
+Sub formatting2() 'subroutine used in toText subroutine
+
+'format column width
+
+    With Selection
+
+        .Columns.AutoFit
+
+        .Rows.AutoFit
+
+        .Borders(xlDiagonalDown).LineStyle = xlNone
+
+        .Borders(xlDiagonalUp).LineStyle = xlNone
+
+        .Borders(xlEdgeLeft).LineStyle = xlNone
+
+        .Borders(xlEdgeTop).LineStyle = xlNone
+
+        .Borders(xlEdgeBottom).LineStyle = xlNone
+
+        .Borders(xlEdgeRight).LineStyle = xlNone
+
+        .Borders(xlInsideVertical).LineStyle = xlNone
+
+        .Borders(xlInsideHorizontal).LineStyle = xlNone
+
+    End With
+
+   
+
+End Sub
+
+ 
+
+ 
+
+Sub formatting1() 'subroutine used in toText subroutine
+
+'fomating first row to text
+
+    With Selection
+
+        .NumberFormat = "@"
+
+        .Interior.Pattern = xlNone
+
+        .Interior.TintAndShade = 0
+
+        .Interior.PatternTintAndShade = 0
+
+    End With
+
+   
+
+End Sub
+
+ 
+
+ 
+
+Sub formattingNum() 'subroutine used in toText subroutine
+
+    With Selection
+
+        .NumberFormat = "0.00"
+
+        .Interior.Pattern = xlNone
+
+        .Interior.TintAndShade = 0
+
+        .Interior.PatternTintAndShade = 0
+
+    End With
+
+   
+
+End Sub
+
+ 
+
+Sub turnblack() 'subroutine used in toText subroutine
+
+'change colour of text to balck
+
+    With Selection.Font
+
+        .ColorIndex = xlAutomatic
+
+        .TintAndShade = 0
+
+    End With
+
+End Sub
+
+ 
+
+ 
+
+Sub finding() 'subroutine used in matching subroutine to compare "daily T requests" and "worksheets"
+
+    Dim AccNum As String
+
+    Dim DYNnum As String
+
+    Dim i As Integer, y As Integer
+
+    Dim Result As String
+
+   
+
+    i = 2
+
+   
+
+    AccNumW = Sheets(4).Cells(2, 1).Value
+
+    DYNnumW = Sheets(4).Cells(2, 2).Value
+
+   
+
+    
+
+    Do While AccNumW <> ""
+
+        'compare first
+
+       
+
+        AccNumD = Sheets(3).Cells(2, 1).Value
+
+        DYNnumD = Sheets(3).Cells(2, 2).Value
+
+       
+
+        y = 2
+
+       
+
+        Do While AccNumD <> ""
+
+       
+
+            'MsgBox AccNumW & " = " & AccNumD & "       " & DYNnumW & " = " & DYNnumD
+
+            Result = StrComp(DYNnumW, DYNnumD, vbBinaryCompare)
+
+           
+
+            'MsgBox Result
+
+           
+
+            If AccNumW = AccNumD And Result = 0 Then
+
+                Sheets(3).Cells(y, 1).Font.Color = vbGreen
+
+                Sheets(3).Cells(y, 2).Font.Color = vbGreen
+
+               
+
+                Sheets(4).Cells(i, 1).Font.Color = vbGreen
+
+                Sheets(4).Cells(i, 2).Font.Color = vbGreen
+
+            End If
+
+           
+
+            y = y + 1
+
+            AccNumD = Sheets(3).Cells(y, 1).Value
+
+            DYNnumD = Sheets(3).Cells(y, 2).Value
+
+        Loop
+
+ 
+
+        ' go to next values we want to use for next comparison
+
+        i = i + 1
+
+       
+
+        'MsgBox AccNumW & " & " & DYNnumW
+
+       
+
+        AccNumW = Sheets(4).Cells(i, 1).Value
+
+        DYNnumW = Sheets(4).Cells(i, 2).Value
+
+       
+
+    Loop
+
+   
+
+End Sub
+
+ 
+
+'////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Sub matching2() 'subroutine to compare "J's Trades" with "daily T requests"
+
+    Dim AccNum As String
+
+    Dim DYNnum As String
+
+    Dim i As Integer, y As Integer
+
+    Dim Result As String
+
+    
+
+    
+
+    'after values are copied to spreadsheet extract DYN numbers from J's trades
+
+    Separate
+
+   
+
+    
+
+    Sheets(2).Select 'next sheet
+
+    Cells.Select 'format columns
+
+    toblack 'change all columns to black
+
+   
+
+    Sheets(3).Select 'next sheet
+
+    Cells.Select 'format columns
+
+    toblack 'change all columns to black
+
+   
+
+    Sheets(4).Select 'next sheet
+
+    Cells.Select 'format columns
+
+    toblack 'change all columns to black
+
+    
+
+    
+
+    
+
+    i = 2
+
+   
+
+    AccNumW = Sheets(2).Cells(2, 1).Value
+
+    DYNnumW = Sheets(2).Cells(2, 2).Value
+
+   
+
+    
+
+    Do While AccNumW <> ""
+
+        'compare first
+
+       
+
+        AccNumD = Sheets(3).Cells(2, 1).Value
+
+        DYNnumD = Sheets(3).Cells(2, 2).Value
+
+       
+
+        y = 2
+
+       
+
+        Do While AccNumD <> ""
+
+       
+
+            'MsgBox AccNumW & " = " & AccNumD & "       " & DYNnumW & " = " & DYNnumD
+
+            Result = StrComp(DYNnumW, DYNnumD, vbBinaryCompare)
+
+           
+
+            'MsgBox Result
+
+           
+
+            If AccNumW = AccNumD And Result = 0 Then
+
+                Sheets(3).Cells(y, 1).Font.Color = vbBlue
+
+                Sheets(3).Cells(y, 2).Font.Color = vbBlue
+
+               
+
+                Sheets(2).Cells(i, 1).Font.Color = vbBlue
+
+                Sheets(2).Cells(i, 2).Font.Color = vbBlue
+
+            End If
+
+           
+
+            y = y + 1
+
+            AccNumD = Sheets(3).Cells(y, 1).Value
+
+            DYNnumD = Sheets(3).Cells(y, 2).Value
+
+        Loop
+
+ 
+
+        ' go to next values we want to use for next comparison
+
+        i = i + 1
+
+       
+
+        'MsgBox AccNumW & " & " & DYNnumW
+
+       
+
+        AccNumW = Sheets(2).Cells(i, 1).Value
+
+        DYNnumW = Sheets(2).Cells(i, 2).Value
+
+       
+
+    Loop
+
+   
+
+    Sheets(2).Activate 'activate the sheet so that the user sees this sheet when process is done running
+
+    Rows("1:1").Select
+
+    Selection.Font.Bold = True
+
+   
+
+End Sub
+
+ 
+
+ 
+
+Sub Separate() 'subroutine used in matching2 subroutine
+
+ 
+
+    Dim sentence1() As String
+
+    Dim newS As String
+
+    Dim i As Integer
+
+   
+
+    Set ws = Sheets(2)
+
+    ws.Activate
+
+   
+
+    For i = 2 To 500
+
+        If IsEmpty(Cells(i, 3).Value) = False Then
+
+            newS = Cells(i, 3) 'get sentence from cell
+
+            sentence1 = Split(newS, "-") 'get DYN numbers from sentence
+
+           
+
+            'print DYN number into column 2
+
+            Cells(i, 2).Value = sentence1(0)
+
+        Else
+
+            Exit For
+
+        End If
+
+    Next i
+
+   
+
+    
+
+    Sheets(2).Select 'next sheet
+
+    Columns("B:B").Select
+
+    Selection.Font.Bold = False
+
+   
+
+End Sub
+
+ 
+
